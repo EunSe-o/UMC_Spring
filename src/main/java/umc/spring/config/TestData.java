@@ -33,14 +33,14 @@ public class TestData {
 
         // 가게 더미
         Store store = storeRepository.save(Store.builder()
-                .name("테스트 가게")
+                .storeName("테스트 가게")
                 .address("서울시 영등포구 영중동 123")
                 .city("서울시")
                 .district("영등포구")
                 .neighborhood("영중동")
                 .build());
 
-        System.out.println("가게 생성 완료 (ID: " + store.getId() + ")");
+        System.out.println("가게 생성 완료 (ID: " + store.getStoreId() + ")");
 
         // 미션 더미
         if (missionRepository.findById(1).isEmpty()) {

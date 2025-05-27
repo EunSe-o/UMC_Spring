@@ -26,8 +26,9 @@ public class Mission {
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "ENUM('new','completed','progress') DEFAULT 'new'")
+    @Column(columnDefinition = "ENUM('new_','completed','progress') DEFAULT 'new_'")
     private MissionStatus status = MissionStatus.new_;
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)

@@ -15,12 +15,12 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
     public Long createStore(StoreRequestDto dto) {
-        if (storeRepository.existsByNameAndAddress(dto.name(), dto.address())) {
+        if (storeRepository.existsByStoreNameAndAddress(dto.name(), dto.address())) {
             throw new CustomException("이미 같은 이름과 주소의 가게가 존재합니다.");
         }
 
         Store store = Store.builder()
-                .name(dto.name())
+                .storeName(dto.name())
                 .address(dto.address())
                 .city(dto.city())
                 .district(dto.district())
@@ -28,6 +28,6 @@ public class StoreService {
                 .build();
 
         storeRepository.save(store);
-        return store.getId();
+        return store.getStoreId();
     }
 }

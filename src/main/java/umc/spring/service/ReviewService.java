@@ -1,5 +1,8 @@
 package umc.spring.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import umc.spring.converter.ReviewConverter;
 import umc.spring.global.exception.CustomException;
 import umc.spring.repository.UserRepository;
 import umc.spring.repository.MissionRepository.MissionRepository;
@@ -12,6 +15,9 @@ import umc.spring.domain.Review;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import umc.spring.web.dto.ReviewRequestDto;
+import umc.spring.web.dto.ReviewResponseDto;
+
+import java.util.List;
 
 
 @Service
@@ -38,5 +44,14 @@ public class ReviewService {
 
         reviewRepository.save(review);
         return review.getReviewId();
+    }
+
+    private final ReviewConverter reviewConverter;
+    public List<ReviewResponseDto> getMyReviews(int page) {
+        Long userId = 1L;
+        PageRequest pageable = PageRequest.of(page, 10);
+        Page<Review> result = reviewRepository.findAllByUser_Uid(userId, pageable);
+
+        return reviewConverter.toDtoList(result.getContent());
     }
 }
