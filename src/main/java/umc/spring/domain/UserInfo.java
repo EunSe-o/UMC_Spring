@@ -19,7 +19,7 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 255)
     private String upassword;
 
     @Column(nullable = false, length = 40)
